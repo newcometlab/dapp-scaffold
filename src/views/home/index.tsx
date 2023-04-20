@@ -8,6 +8,7 @@ import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 // Components
 import { RequestAirdrop } from '../../components/RequestAirdrop';
 import pkg from '../../../package.json';
+import { notify } from 'utils/notifications';
 
 // Store
 import useUserSOLBalanceStore from '../../stores/useUserSOLBalanceStore';
@@ -25,6 +26,10 @@ export const HomeView: FC = ({ }) => {
       getUserSOLBalance(wallet.publicKey, connection)
     }
   }, [wallet.publicKey, connection, getUserSOLBalance])
+
+  useEffect(() => {
+    notify({ type: 'error', message: `wallet.disconnecting: ${String(wallet.disconnecting)}` });
+  }, [wallet.disconnecting])
 
   return (
 
