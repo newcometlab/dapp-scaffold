@@ -20,12 +20,12 @@ export const HomeView: FC = ({ }) => {
   const balance = useUserSOLBalanceStore((s) => s.balance)
   const { getUserSOLBalance } = useUserSOLBalanceStore()
 
-  useEffect(() => {
-    if (wallet.publicKey) {
-      console.log(wallet.publicKey.toBase58())
-      getUserSOLBalance(wallet.publicKey, connection)
-    }
-  }, [wallet.publicKey, connection, getUserSOLBalance])
+  // useEffect(() => {
+  //   if (wallet.publicKey) {
+  //     console.log(wallet.publicKey.toBase58())
+  //     getUserSOLBalance(wallet.publicKey, connection)
+  //   }
+  // }, [wallet.publicKey, connection, getUserSOLBalance])
 
 
   // useEffect(() => {
