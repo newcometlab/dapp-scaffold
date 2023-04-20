@@ -32,6 +32,10 @@ export const HomeView: FC = ({ }) => {
     notify({ type: 'error', message: `wallet.disconnecting: ${String(wallet.disconnecting)}` });
   }, [wallet.disconnecting])
 
+  useEffect(() => {
+    notify({ type: 'error', message: `wallet.publicKey: ${wallet.publicKey ? `${wallet.publicKey.toBase58().slice(0, 3)}...${wallet.publicKey.toBase58().slice(-3)}` : 'NULL'}` });
+  }, [wallet.publicKey])
+
   return (
 
     <div className="md:hero mx-auto p-4">
