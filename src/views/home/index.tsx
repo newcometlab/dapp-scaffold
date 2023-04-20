@@ -34,7 +34,10 @@ export const HomeView: FC = ({ }) => {
 
   useEffect(() => {
     if (wallet.publicKey) {
-      console.log(wallet.publicKey.toBase58())
+      console.log('publicKey:', wallet.publicKey.toBase58())
+      notify({ type: 'error', message: `wallet.publicKey: ${wallet.publicKey.toBase58()}` });
+    } else {
+      notify({ type: 'error', message: `wallet.publicKey: NULL` });
     }
 }, [wallet.publicKey])
 
