@@ -28,9 +28,9 @@ export const HomeView: FC = ({ }) => {
   }, [wallet.publicKey, connection, getUserSOLBalance])
 
 
-  useEffect(() => {
-    notify({ type: 'error', message: `wallet.disconnecting: ${String(wallet.disconnecting)}` });
-  }, [wallet.disconnecting])
+  // useEffect(() => {
+  //   notify({ type: 'error', message: `wallet.disconnecting: ${String(wallet.disconnecting)}` });
+  // }, [wallet.disconnecting])
 
   useEffect(() => {
     notify({ type: 'error', message: `wallet.publicKey: ${wallet.publicKey ? `${wallet.publicKey.toBase58().slice(0, 3)}...${wallet.publicKey.toBase58().slice(-3)}` : 'NULL'}` });
