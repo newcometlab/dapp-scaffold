@@ -27,6 +27,7 @@ export const HomeView: FC = ({ }) => {
     }
   }, [wallet.publicKey, connection, getUserSOLBalance])
 
+
   useEffect(() => {
     notify({ type: 'error', message: `wallet.disconnecting: ${String(wallet.disconnecting)}` });
   }, [wallet.disconnecting])
