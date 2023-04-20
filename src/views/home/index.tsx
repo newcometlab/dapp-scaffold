@@ -32,9 +32,9 @@ export const HomeView: FC = ({ }) => {
     notify({ type: 'error', message: `wallet.disconnecting: ${String(wallet.disconnecting)}` });
   }, [wallet.disconnecting])
 
-  useEffect(() => {
-    notify({ type: 'error', message: `wallet.publicKey: ${wallet.publicKey ? `${wallet.publicKey.toBase58().slice(0, 4)}...${wallet.publicKey.toBase58().slice(-4)}` : 'NULL'}` });
-}, [wallet.publicKey])
+//   useEffect(() => {
+//     notify({ type: 'error', message: `wallet.publicKey: ${wallet.publicKey ? `${wallet.publicKey.toBase58().slice(0, 4)}...${wallet.publicKey.toBase58().slice(-4)}` : 'NULL'}` });
+// }, [wallet.publicKey])
 
   return (
 
