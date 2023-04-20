@@ -20,25 +20,20 @@ export const HomeView: FC = ({ }) => {
   const balance = useUserSOLBalanceStore((s) => s.balance)
   const { getUserSOLBalance } = useUserSOLBalanceStore()
 
-  // useEffect(() => {
-  //   if (wallet.publicKey) {
-  //     console.log(wallet.publicKey.toBase58())
-  //     getUserSOLBalance(wallet.publicKey, connection)
-  //   }
-  // }, [wallet.publicKey, connection, getUserSOLBalance])
-
-
-  // useEffect(() => {
-  //   notify({ type: 'error', message: `wallet.disconnecting: ${String(wallet.disconnecting)}` });
-  // }, [wallet.disconnecting])
-
   useEffect(() => {
     if (wallet.publicKey) {
-      console.log('publicKey:', wallet.publicKey.toBase58())
-      notify({ type: 'error', message: `wallet.publicKey: ${wallet.publicKey.toBase58()}` });
-    } else {
-      notify({ type: 'error', message: `wallet.publicKey: NULL` });
+      console.log(wallet.publicKey.toBase58())
+      getUserSOLBalance(wallet.publicKey, connection)
     }
+  }, [wallet.publicKey, connection, getUserSOLBalance])
+
+
+  useEffect(() => {
+    notify({ type: 'error', message: `wallet.disconnecting: ${String(wallet.disconnecting)}` });
+  }, [wallet.disconnecting])
+
+  useEffect(() => {
+    notify({ type: 'error', message: `wallet.publicKey: ${wallet.publicKey ? `${wallet.publicKey.toBase58().slice(0, 4)}...${wallet.publicKey.toBase58().slice(-4)}` : 'NULL'}` });
 }, [wallet.publicKey])
 
   return (
