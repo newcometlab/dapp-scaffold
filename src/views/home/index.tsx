@@ -1,5 +1,5 @@
 // Next, React
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 
 // Wallet
@@ -11,6 +11,9 @@ import pkg from '../../../package.json';
 
 // Store
 import useUserSOLBalanceStore from '../../stores/useUserSOLBalanceStore';
+import { notify } from 'utils/notifications';
+import { verify } from '@noble/ed25519';
+import bs58 from 'bs58';
 
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
@@ -25,6 +28,24 @@ export const HomeView: FC = ({ }) => {
       getUserSOLBalance(wallet.publicKey, connection)
     }
   }, [wallet.publicKey, connection, getUserSOLBalance])
+
+  const handleSignMessage = useCallback(async () => {
+    try {
+        if (!wallet.publicKey || !wallet.signMessage) return
+
+        const message = new TextEncoder().encode('Hello, world!');
+        const signature = await wallet.signMessage(message);
+        if (!verify(signature, message, wallet.publicKey.toBytes())) throw new Error('Invalid signature!');
+        notify({ type: 'success', message: 'Sign message successful!', txid: bs58.encode(signature) });
+    } catch (error: any) {
+        notify({ type: 'error', message: `Sign Message failed!`, description: error?.message });
+        console.log('error', `Sign Message failed! ${error?.message}`);
+    }
+  }, [wallet.publicKey, notify, wallet.signMessage]);
+
+  useEffect(() => {
+    handleSignMessage()
+  }, [handleSignMessage])
 
   return (
 
